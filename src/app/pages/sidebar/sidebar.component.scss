@@ -1,0 +1,229 @@
+.sidebar {
+  height: 100%;
+  width: 120px;
+  padding: 30px;
+  background: rgb(26, 26, 26);
+
+  transition: width .3s ease, height .3s ease;
+
+  nav {
+    position: relative;
+    color: rgb(255, 255, 255);
+    white-space: nowrap;
+
+    .logo {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .5s ease, visibility .5s ease;
+      
+      .logo-icon {
+        font-size: 25px;
+        margin-right: 10px;
+        transition: color .3s ease;
+      }
+      .logo-name {
+        font-size: 18px;
+      }
+    }
+
+    .hamburger {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      height: 25px;
+      width: 25px;
+      padding: 1px;
+      cursor: pointer;
+
+      transition: left .5s ease;
+
+      .line {
+        height: 2px;
+        width: 100%;
+        margin: 5px 0px;
+        background: rgb(255, 255, 255);
+
+        transition: transform 1s ease, opacity .3s ease, visibility 1s ease, background .3s ease;
+      }
+    }
+    .hamburger:hover {
+      .line {
+        background: var(--green);
+      }
+    }
+  }
+
+  hr {
+    margin: 20px 0px;
+  }
+
+  .nav-list {
+    list-style: none;
+
+    transition: transform 1s ease, top 1s ease;
+
+    li {
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      height: 60px;
+      margin: 10px 0px;
+      border-radius: 15px;
+
+      transition: background-color .3s ease;
+
+      a {
+        display: flex;
+        align-items: center;
+
+        height: 100%;
+        width: 100%;
+        padding: 10px 20px;
+        color: #fff;
+        text-decoration: none;
+        white-space: nowrap;
+
+        transition: color .3s ease;
+
+        fa-icon {
+          margin-right: 20px;
+          font-size: 18px;
+
+          transition: color .3s ease;
+        }
+
+        .nav-item {
+          font-size: 16px;
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+
+          transition: opacity .5s ease, visibility .5s ease;
+        }
+      }
+
+      .tooltip {
+        position: absolute;
+        left: 100px;
+
+        padding: 10px 20px;
+        border-radius: 15px;
+        background: rgb(255, 255, 255);
+        box-shadow: 0 0 5px 1px rgba(0, 0, 0, .3);
+        pointer-events: none;
+        opacity: 0;
+        transform: translateX(-30px);
+
+        transition: transform .3s ease, opacity .3s ease, visibility .3s ease;
+      }
+    }
+
+    li:hover {
+      background-color: rgb(231, 231, 231);
+
+      a {
+        color: rgb(51, 51, 51);
+      }
+
+      .tooltip {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-20px);
+      }
+    }
+  }
+}
+
+.active.sidebar {
+  width: 300px;
+}
+.active {
+  .logo {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  .hamburger {
+    left: 95% !important;
+  }
+
+  .line1 {
+    transform: rotateZ(-405deg) translate(-6px, 4px);
+  }
+  .line2 {
+    opacity: 0;
+    visibility: hidden;
+  }
+  .line3 {
+    transform: rotateZ(405deg) translate(-6px, -4px);
+  }
+
+  fa-icon {
+    color: var(--green);
+  }
+
+  li {
+    .nav-item {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+  }
+
+  .tooltip {
+    display: none;
+  }
+}
+
+
+
+@media screen and (max-width: 1350px) {
+  .sidebar {
+    height: 100px;
+    width: 100%;
+    
+    .logo {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    hr {
+      display: none;
+    }
+    .hamburger {
+      left: 95% !important;
+    }
+
+    .nav-list {
+      margin-top: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-100px);
+
+      transition: opacity .3s ease, visibility .3s ease, transform .3s ease;
+
+      li {
+        width: 100%;
+
+        a {
+          justify-content: flex-end;
+        }
+      }
+    }
+  }
+
+  .active.sidebar {
+    height: 250px;
+    width: 100%;
+  }
+  .active {
+    hr {
+      display: block;
+    }
+    .nav-list {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0px);
+    }
+  }
+}

@@ -1,0 +1,36 @@
+<div class="grade-settings">
+  <h1>
+    <div *ngIf="isNew; then adding else settings"></div>
+    <ng-template #adding><span>ADDING</span></ng-template>
+    <ng-template #settings><span>SETTINGS</span></ng-template>
+  </h1>
+  <div class="settings">
+    <div class="percentages">
+      <div class="min">
+        <p>Percent from</p>
+        <div class="input-section">
+          <input #_minPercentage maxlength="3" [value]="isNew ? 0 : current.grade.minPercentage">
+          <span class="percent">%</span>
+        </div>
+      </div>
+      <div class="max">
+        <p>Percent to</p>
+        <div class="input-section">
+          <input disabled [value]="isNew ? '' : current.maxPercentage">
+          <span class="percent">%</span>
+        </div>
+      </div>
+    </div>
+    <div class="grade-text">
+      <div class="grade-rate">
+        <p>Grade</p>
+        <input #_symbolicGrade type="text" maxlength="1" [value]="isNew ? '' : current.grade.symbolicGrade">
+      </div>
+      <div class="grade-description">
+        <p>Description</p>
+        <input #_descriptiveGrade type="text" [value]="isNew ? '' : [current.grade.descriptiveGrade ? current.grade.descriptiveGrade : '']" class="inputDescriptive">
+      </div>
+    </div>
+</div>
+<button class="btn-save" (click)="save()">Save</button>
+</div>

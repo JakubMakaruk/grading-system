@@ -1,0 +1,75 @@
+<div class="grades-container">
+    <h1>GRADES</h1>
+    <ul id="ulGrades">
+        <li class="grade" 
+            id="{{ grade.id }}" 
+            *ngFor='let grade of grades; reverse let i = index' 
+            (click)="onClickGrade($event.target)" 
+            (click)="selectGrade($event)">
+            
+            <div class="grade-info" (click)="$event.stopPropagation()">
+                <!-- 
+                    ### PIERWSZY SPOSÓB NA WYŚWIETLANIE SYMBOLI OCEN ###
+                    Każda ocena ma swój symbol, który nie może się powtarzać (chyba, że użytkownik sam zmieni). Najwyższa ocena ma symbol A, kolejna będzie miała symbol B, następna C, itd. Dzięki temu nie mamy ograniczenia co do ilości ocen. Zasugerowałem takie rozwiązanie z powodu braku wykorzystania pola symbolicGrade po stronie frontendu (na podglądowym zdjęciu nigdzie nie widzę elementu np. "Very Good") oraz symbolu "E", które chyba nie istnieje w edukacji -> http://www.qu.edu.qa/students/registration/student-records/grade-symbols 
+                -->
+                <div class="title">
+                    <div *ngIf="grade.symbolicGrade.length == 1; then printSymbol else convertSymbol"></div>
+
+                    <ng-template #convertSymbol>
+                        {{ alphabet[grades.length - i - 1] }}
+                    </ng-template>
+
+                    <ng-template #printSymbol>
+                        {{ grade.symbolicGrade }}
+                    </ng-template>
+                </div>
+
+                <!-- 
+                    ### DRUGI SPOSÓB NA WYŚWIETLANIE SYMBOLI OCEN ###
+                    Z API dostajemy pole symbolicGrade, którego wartością może być "Very Good"/"Good"/itp. W związku z tym za pomocą instrukcji switch case, możemy w zależności od wartości z API wyświetlać odpowiedni symbol dla oceny.
+                -->
+                <!-- 
+                    <div class="title" [ngSwitch]="grade.symbolicGrade">
+                    <span *ngSwitchCase="'Excellent'">A</span>
+                    <span *ngSwitchCase="'Very Good'">B</span>
+                    <span *ngSwitchCase="'Good'">C</span>
+                    <span *ngSwitchCase="'Pass'">D</span>
+                    <span *ngSwitchCase="'Fail'">F</span>
+                    <span *ngSwitchDefault>?</span>
+                    </div> 
+                -->
+
+                <div class="percentage" (click)="$event.stopPropagation()">
+                    <span class="min">{{ grade.minPercentage }}%</span>
+                    -
+                    <div *ngIf="i < grades.length-1; then notLastGrade else lastGrade"></div>
+
+                        <ng-template #notLastGrade>
+                            <div *ngIf="grades[i+1].minPercentage == 0; then printZeroMax else printNormalMax"></div>
+
+                            <ng-template #printZeroMax>
+                                <span class="max">0%</span>
+                            </ng-template>
+
+                            <ng-template #printNormalMax>
+                                <span class="max">{{ grades[i+1].minPercentage - 1 }}%</span>
+                            </ng-template>
+                        </ng-template>
+
+                        <ng-template #lastGrade>
+                            <span class="max">100%</span>
+                        </ng-template>
+                </div>
+
+            </div>
+
+            <div class="delete" (click)="$event.stopPropagation()" (click)="deleteGrade(grade.id)">
+                <fa-icon [icon]="faTrashAlt"></fa-icon>
+            </div>
+        </li>
+
+        <li class="add-new-grade" (click)="addGrade()">
+            <p>+ ADD NEW GRADE</p>
+        </li>
+    </ul>
+</div>

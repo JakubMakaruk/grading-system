@@ -1,0 +1,33 @@
+<div class="sidebar" [ngClass]="{active: showSidebar}">
+  <nav>
+    <div class="logo">
+      <fa-icon [icon]="faUser" class="logo-icon"></fa-icon>
+      <span class="logo-name">Grading System</span>
+    </div>
+
+    <div class="hamburger" (click)="showSidebar = !showSidebar">
+      <div class="line line1"></div>
+      <div class="line line2"></div>
+      <div class="line line3"></div>
+    </div>
+  </nav>
+
+  <hr>
+
+  <ul class="nav-list">
+    <li>
+      <a href="#" routerLink="">
+        <fa-icon [icon]="faHome"></fa-icon>
+        <span class="nav-item">Home</span>
+      </a>
+      <span class="tooltip">Home</span>
+    </li>
+    <li>
+      <a href="#" routerLink="/configuration">
+        <fa-icon [icon]="faCogs"></fa-icon>
+        <span class="nav-item">Configuration</span>
+      </a>
+      <span class="tooltip">Configuration</span>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,107 @@
+.grades-container {
+  height: 100%;
+  width: 100%;
+  background: var(--light-green);
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
+  overflow: auto;
+  scrollbar-width: thin;
+
+  h1 {
+    color: var(--black);
+    opacity: .2;
+    font-size: 40px;
+  }
+
+  ul {
+    width: 100%;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .grade {
+      width: 80%;
+      border-radius: 10px;
+      padding: 15px 20px;
+      margin: 25px 0px;
+      background: var(--white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform .3s ease, box-shadow .3s ease;
+      cursor: pointer;
+
+      .grade-info {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        .title {
+          width: 40px;
+          height: 40px;
+          padding: 5px;
+          border-radius: 50%;
+          border: 1px solid var(--light-green);
+          color: var(--black);
+          font-size: 20px;
+          font-weight: 700;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+
+      .delete {
+        height: 40px;
+        width: 40px;
+        font-size: 20px;
+        color: #fff;
+        background: var(--red);
+        padding: 4px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        transition: background .3s ease;
+      }
+
+      .delete:hover {
+        background: var(--dark-red);
+      }
+    }
+    .grade:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .add-new-grade {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--white);
+        margin: 25px 0;
+        cursor: pointer;
+        transition: text-shadow .3s ease, color .3s ease, transform .3s ease;
+    }
+    .add-new-grade:hover {
+        transform: scale(1.1);
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+    }
+  }
+}
+
+.active {
+  .grades-container {
+    padding: 30px 30px 30px 200px;
+  }
+}
+
+.selected {
+  background:  var(--selected-item) !important;
+  transform: scale(1.05);
+  box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.3);
+}
